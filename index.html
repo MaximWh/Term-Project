@@ -5,14 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1" /> 
     <title>Maximillian's Electronics Emporium</title>
     <script src="js/cookiemanager.js" ></script>
-    <script src="js/validation.js"></script>
     <script>
-   function logoff()
-   {
-   setCookie("flag","",-1);
-   setCookie("whoami","",-1);
-   location.href="index.html";
-   }
+    function login()
+    {
+      username=document.getElementById("username").value;
+      password=document.getElementById("password").value;
+      pass=getCookie(username);
+  
+      if (pass == null) alert("User Does not Exist");
+      else
+      {
+        if(pass == password)
+        {
+          setCookie("flag","true",30);
+          setCookie("whoami",username,30);
+          location.href="products.html";
+        }
+        else alert("Password is incorrect");
+      }
+    }
     </script>
     <link rel="stylesheet" href="css/bootstrap.css" />
     <link rel="stylesheet" href="css/confetti_cuisine.css" />
@@ -40,7 +51,7 @@
   background: #FFF; 
   color: #47433F;}
   
-  .form_settings .submit
+.form_settings .submit
 { font: 100% arial; 
   border: 2px; 
   width: 99px; 
@@ -51,7 +62,6 @@
   cursor: pointer; 
   background: #3B3B3B; 
   color: #FFF;}
-
 
 .form_settings textarea, .form_settings select
 { font: 100% arial; 
@@ -66,7 +76,6 @@
   width: 14px;
   border: 0;
   background: none;}
-
 </style>
   </head>
   <body>
@@ -80,16 +89,17 @@
     <div id="content">
         <div style="text-align: left; padding: 0;">
             <div id="content">
-                <h1 style="font: normal 179% 'century gothic', arial, sans-serif;color: #43423F;margin: 0 0 15px 0;padding: 15px 0 5px 0;" >Logoff</h1>
-                <form>
-                  <div class="form_settings">
-                  <center>
-                  <input class="submit" type="submit" value="Logoff" onclick="logoff()">
-                  </center>
-                  </div>
-                  </form>
+                <h1 style="font: normal 179% 'century gothic', arial, sans-serif;color: #43423F;margin: 0 0 15px 0;padding: 15px 0 5px 0;" >Login</h1>
+                <form action="#" method="post">
+                <div class="form_settings">
+                <p><span>Username:</span><input class="contact" type="text" name="your_name" value="" id="username"/></p>
+                <p><span>password:</span><input class="contact" type="password" name="your_email" value="" id="password"/></p>
+                <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="button" name="contact_submitted" value="Submit" onclick="login();" />
+                  <br><span>&nbsp;</span><a style="margin-left:20px" href="registration.html">Register</a>
+                </p>
                 </div>
-      </div>
+                </form>
+                </div>
       </div>
     </center>
   </body>
