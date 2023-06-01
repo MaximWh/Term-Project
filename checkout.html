@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>  
+<script src="js/cookiemanager.js" ></script>
+<script src="js/validation.js"></script> 
+<script src="js/catalog.js" ></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1" />
+<title>Maximillian's Electronics Emporium</title>
+<link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/confetti_cuisine.css" />
+<script>
+    function deleteAllCookies()
+    {
+      let x=new ShoppingCart(getCookie('whoami'));
+      x.emptyShoppingCart();
+    }
+    deleteAllCookies();
+    </script>
+</head>
+<body>
+    <center>
+        <h1>Thanks for Shopping!</h1>
+        <a href='products.html'>Continue Shopping</a>
+    </center>
+</body>
+</html>

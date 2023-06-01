@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1" />
+<title>Maximillian's Electronics Emporium</title>
+<link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/confetti_cuisine.css" />
+<style>
+#content
+{ 
+  width: 500px;
+  padding: 0;
+}
+</style>
+<style>
+  th{text-align:left;}
+  td{border-bottom:solid black 1px}
+  input[type='text']{width:50px;}
+  </style>
+   <script src="js/cookiemanager.js" ></script>
+   <script src="js/validation.js"></script> 
+   <script src="js/catalog.js" ></script>
+   <script>
+   function delete2(code)
+   {
+       let x=new ShoppingCart(getCookie('whoami'));
+       x.setNumOrdered(code,0); 
+       location.reload();
+   }
+   function update(code)
+   {
+     var name=code+"qty";
+     value=parseInt(document.getElementById(name).value);
+     let x=new ShoppingCart(getCookie('whoami'));
+     x.setNumOrdered(code,value);
+     location.reload();
+   }
+   function createCart()
+  {  
+	var flag2=false;
+	var total=0;
+	var str="<table>";
+	str+="<tr><th colspan='2'>NAME</th><th>QUANTITY</th><th>PRICE</th><th>SUBTOTAL</th>";
+	let x=new ShoppingCart(getCookie('whoami'));
+	let items=x.getItemsOrdered();
+	for(let i=0;i<items.length;i++)
+	{
+		let qty		=items[i].getNumItems();	
+		if(qty !=null)
+		{	
+			var name=items[i].getItemCode()+"qty";
+			var image=items[i].getItemImage();
+			
+			str+="<tr>";
+			str+="<td style='text-align:left'>"+"<img style='width:100px' src='images/"+image+"' />"+"</td>";
+			str+="<td style='text-align:left'>"+items[i].getItemName()+"</td>";
+			str+="<td style='text-align:right'>"+"<input id='"+name+"'type='text' value='"+qty+"' />"+"<input id='"+items[i].getItemCode()+"' type='button' value='update' onclick='update(this.id);' />"+"<img src='images/x.png' style='width:20px' onclick=delete2('"+items[i].getItemCode()+"') /></td>";
+			str+="<td style='text-align:right'>$"+items[i].getUnitCost()+"</td>";
+			str+="<td style='text-align:right'>$"+items[i].getTotalCost()+"</td>";
+			str+="</tr>";
+			flag2=true;
+		}		
+	}
+	str+="<tr><td colspan='4' style='text-align:left'>TOTAL</td><td style='text-align:right'>$"+x.getTotalCost()+"</td></tr>";
+	str+="</table>";
+	if(flag2)
+	{
+		document.getElementById("info").innerHTML=str;
+		document.getElementById("info2").innerHTML="<a href='checkout.html'>Checkout Here</a>";
+	}
+	else 
+	{
+		document.getElementById("info").innerHTML="<h1>EMPTY CART<br><a href='products.html'>Go Back Shopping</a></h1>";
+	}	
+  }
+   </script>
+</head>
+<body onload="createCart();">
+    
+<div id="nav" style="background:black;color:white;">
+      <div class="col-sm nav-align"><h1 id="title">Maximillian's Electronics Emporium</h1></div>
+      <div class="col-sm nav-align">
+
+        <script src="js/menu.js"></script>
+
+      </div>
+</div>
+
+<center>
+        <div id="content">
+        <div style="text-align: left; padding: 0;">
+            <div id="info"></div>
+            <div id="info2"></div>
+        </div>
+        </div>
+</center>
+  
+</body>
+</html>
